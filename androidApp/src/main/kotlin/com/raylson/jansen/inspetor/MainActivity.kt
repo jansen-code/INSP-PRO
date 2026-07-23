@@ -6,18 +6,26 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.raylson.jansen.inspetor.platform.AndroidContextHolder
 
-// 1. Adicionamos o import da sua tela nova que está lá na pasta shared
-import com.raylson.jansen.inspetor.ui.screens.OnboardingScreen 
+// Import do Onboarding mantido caso queira religar rapidamente pra teste
+import com.raylson.jansen.inspetor.ui.screens.OnboardingScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge() // Mantemos isso! É ótimo para a tela cheia
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
+        // ═══ NOVO: precisa acontecer antes de qualquer SecureStorage ser
+        // criado (EncryptedSharedPreferences precisa de um Context de
+        // aplicação) — substitui o `this` que a Activity antiga passava
+        // direto pro SecurePrefs.get(this, ...). ═══
+        AndroidContextHolder.init(applicationContext)
+
         setContent {
-            // 2. Trocamos o App() pela sua tela de Onboarding
-            OnboardingScreen()
+            // Trocamos o OnboardingScreen direto pelo App(), que hospeda
+            // o Navigator do Voyager com o DashboardScreen como raiz.
+            App()
         }
     }
 }
@@ -25,6 +33,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    // 3. Trocamos aqui também para o Preview do Android Studio mostrar a sua tela
-    OnboardingScreen()
+    App()
 }

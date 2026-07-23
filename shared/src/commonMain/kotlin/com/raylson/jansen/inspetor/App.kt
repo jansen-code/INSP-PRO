@@ -1,49 +1,63 @@
 package com.raylson.jansen.inspetor
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
+import androidx.compose.runtime.Composable
+import cafe.adriel.voyager.navigator.Navigator
+import com.raylson.jansen.inspetor.ui.screens.DashboardScreen
 
-import inspetor.shared.generated.resources.Res
-import inspetor.shared.generated.resources.compose_multiplatform
-
+/**
+ * ═══════════════════════════════════════════════════════════════════
+ * App.kt
+ *
+ * Ponto único de navegação, no lugar de cada tela chamar
+ * `startActivity(Intent(this, XActivity::class.java))`.
+ *
+ * Regras de navegação pedidas:
+ * ─────────────────────────────────────────────────────────────────
+ * • Dashboard -> Histórico:      navigator.push(HistoricoRoute)
+ *     (empilha; "voltar" retorna ao Dashboard)
+ *
+ * • Histórico -> Controle N.A.:  navigator.replace(ControleNARoute)
+ *     (troca o topo da pilha; não acumula telas — equivalente a como
+ *     era com `startActivity` + `finish()` implícito, sem empilhar
+ *     Histórico atrás de Controle N.A.)
+ *
+ * • De qualquer tela, botão "voltar direto pro Dashboard":
+ *     navigator.popUntilRoot()
+ *     (usado pelo btnLimparGeral / navegação "home" — limpa a pilha
+ *     inteira de uma vez, sem precisar de N popUp() em sequência)
+ * ─────────────────────────────────────────────────────────────────
+ *
+ * Esses três padrões já estão aplicados dentro de
+ * `HistoricoScreen`/`ControleNAScreen` (ver comentário de exemplo
+ * abaixo) — aqui só criamos o `Navigator` raiz.
+ * ═══════════════════════════════════════════════════════════════════
+ */
 @Composable
-@Preview
 fun App() {
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
-    }
+    Navigator(screen = DashboardScreen)
 }
+
+/*
+ * ─────────────────────────────────────────────────────────────────
+ * Exemplo de uso dentro de HistoricoRoute.Content() (ver
+ * VoyagerScreenWrappers.kt) para ligar os botões da própria tela de
+ * Histórico às regras acima:
+ *
+ * object HistoricoRoute : Screen {
+ *     @Composable
+ *     override fun Content() {
+ *         val navigator = LocalNavigator.currentOrThrow
+ *
+ *         HistoricoScreen(
+ *             onAbrirControleNA = { navigator.replace(ControleNARoute) },
+ *             onVoltarParaDashboard = { navigator.popUntilRoot() }
+ *         )
+ *     }
+ * }
+ *
+ * (Isso implica adicionar esses dois parâmetros de callback à função
+ * `HistoricoScreen()` em MainScreens.kt quando for ligar os botões reais
+ * — não incluído aqui pra não alterar esse arquivo sem necessidade,
+ * conforme a Regra de Ouro.)
+ * ─────────────────────────────────────────────────────────────────
+ */
