@@ -14,9 +14,47 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-// -----------------------------------------------------------------
-// ARQUIVO 20: Item Foto Cofre
-// -----------------------------------------------------------------
+@Composable
+fun DialogConfirmacaoVazaoScreen() {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize().background(Color.Transparent).padding(24.dp)
+    ) {
+        Card(
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 14.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(modifier = Modifier.padding(start = 22.dp, top = 20.dp, end = 22.dp, bottom = 20.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.size(40.dp).background(Color(0xFFEFF6FF), RoundedCornerShape(14.dp)))
+                    Column(modifier = Modifier.padding(start = 14.dp).weight(1f)) {
+                        Text(text = "CONFIRMAÇÃO", color = Color(0xFF94A3B8), fontSize = 10.sp, fontWeight = FontWeight.Bold)
+                        Text(text = "Tem vazão?", color = Color(0xFF0F172A), fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                    }
+                }
+                Box(modifier = Modifier.fillMaxWidth().height(1.dp).padding(vertical = 16.dp).background(Color(0xFFE2E8F0)))
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFDC2626)),
+                        shape = RoundedCornerShape(14.dp),
+                        modifier = Modifier.weight(1f).height(46.dp).padding(end = 8.dp)
+                    ) { Text(text = "NÃO", color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold) }
+                    
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF16A34A)),
+                        shape = RoundedCornerShape(14.dp),
+                        modifier = Modifier.weight(1f).height(46.dp).padding(start = 8.dp)
+                    ) { Text(text = "SIM", color = Color.White, fontSize = 13.sp, fontWeight = FontWeight.Bold) }
+                }
+            }
+        }
+    }
+}
+
 @Composable
 fun ItemFotoCofre(selecionado: Boolean = false) {
     Column(modifier = Modifier.padding(6.dp)) {
@@ -46,9 +84,6 @@ fun ItemFotoCofre(selecionado: Boolean = false) {
     }
 }
 
-// -----------------------------------------------------------------
-// ARQUIVO 21: Item Pasta Cofre
-// -----------------------------------------------------------------
 @Composable
 fun ItemPastaCofre() {
     Card(
