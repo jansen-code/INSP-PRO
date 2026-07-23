@@ -37,7 +37,6 @@ object HistoricoScreen : Screen {
         val screenModel = rememberScreenModel { HistoricoScreenModel(context.applicationContext) }
         val state by screenModel.state.collectAsState()
 
-        // Recarrega a grade (para atualizar badges) sempre que a tela voltar à frente
         val lifecycleOwner = LocalLifecycleOwner.current
         DisposableEffect(lifecycleOwner) {
             val observer = LifecycleEventObserver { _, event ->
@@ -108,7 +107,7 @@ object HistoricoScreen : Screen {
                 Spacer(modifier = Modifier.height(24.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = "SELECIONE (MODO \)",
+                        text = "SELECIONE (MODO " + state.mode.name.replace("_", "-") + ")",
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF475569)
@@ -152,12 +151,11 @@ object HistoricoScreen : Screen {
                                             .background(Color(0xFFF1F5F9))
                                             .clickable {
                                                 if (item.temRegistro) {
-                                                    // --- O BYPASS: Abre a Activity Antiga no modo "sombra" ---
                                                     val intent = Intent().setClassName(context.packageName, "com.raylson.jansen.inspetor.HistoricoActivity")
                                                     intent.putExtra("EDIT_ITEM", item.nome)
                                                     context.startActivity(intent)
                                                 } else {
-                                                    Toast.makeText(context, "Sem registro para \", Toast.LENGTH_SHORT).show()
+                                                    Toast.makeText(context, "Sem registro para " + item.nome, Toast.LENGTH_SHORT).show()
                                                 }
                                             },
                                         contentAlignment = Alignment.Center
@@ -184,4 +182,3 @@ object HistoricoScreen : Screen {
         }
     }
 }
-
