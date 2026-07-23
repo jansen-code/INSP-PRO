@@ -212,7 +212,8 @@ actual object OverlayRenderer {
 
     private fun calcularAlturasEmpilhadas(fotoSup: Bitmap?, fotoInf: Bitmap?, canvasW: Int): Pair<Int, Int> {
         val context = AndroidContextHolder.appContext
-        if (ImageHelper.lerProporcao(context) == "full") {
+        val ratioStr = ImageHelper.lerProporcao(context).replace("x", ":", ignoreCase = true)
+        if (ratioStr == "full") {
             fun alturaPorFoto(foto: Bitmap?): Int {
                 val f = foto ?: return (canvasW * 5 / 4) / 2
                 val ratio = f.width.toFloat() / f.height.toFloat()
@@ -220,7 +221,7 @@ actual object OverlayRenderer {
             }
             return alturaPorFoto(fotoSup) to alturaPorFoto(fotoInf)
         }
-        val meia = when (ImageHelper.lerProporcao(context)) {
+        val meia = when (ratioStr) {
             "4:5" -> (canvasW * 5) / 4 / 2
             "3:4" -> (canvasW * 4) / 3 / 2
             "9:16" -> (canvasW * 16) / 9 / 2
@@ -360,7 +361,7 @@ actual object OverlayRenderer {
         val statusCor = corStatus(statusBomba)
         val context = AndroidContextHolder.appContext
         val bmpFoto = fotoSup ?: Bitmap.createBitmap(W, 100, Bitmap.Config.ARGB_8888)
-        val proporcao = ImageHelper.lerProporcao(context)
+        val proporcao = ImageHelper.lerProporcao(context).replace("x", ":", ignoreCase = true)
 
         val alturaFinal = if (proporcao == "full") {
             val ratio = bmpFoto.width.toFloat() / bmpFoto.height.toFloat()

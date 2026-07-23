@@ -98,6 +98,7 @@ object ImageHelper {
 
     fun recortarPorProporcao(bitmap: Bitmap, proporcao: String): Bitmap {
         if (proporcao == "full") return bitmap
+        val p = proporcao.replace("x", ":", ignoreCase = true)
 
         val srcW = bitmap.width.toFloat()
         val srcH = bitmap.height.toFloat()
@@ -112,7 +113,7 @@ object ImageHelper {
         val dstW: Int
         val dstH: Int
 
-        when (proporcao) {
+        when (p) {
             // ← NOVO: 4:5  →  altura = largura * 5/4
             "4:5" -> {
                 val targetRatio = 4f / 5f   // largura/altura
@@ -189,16 +190,17 @@ object ImageHelper {
 
     // ── 4. Lê a proporção salva nas prefs ────────────────────────────────────
     //  Default agora é PROP_4x5 (proporção padrão do aplicativo)
+    //  ═══ CORREÇÃO: lê do mesmo local que CameraCaptureActivity.toggleRatio() salva ═══
 
     fun lerProporcao(context: Context): String {
         val prefs = SecurePrefs.get(
             context,
-            "Configuracoes"
+            "inspetor_prefs"
         )
         return prefs.getString(
-            "pref_proporcao",
-            "4:5"   // ← default atualizado
-        ) ?: "4:5"
+            "proporcao_camera",
+            "4x5"   // ← default: mesma chave/formato que ConfiguracoesActivity
+        ) ?: "4x5"
     }
 
     // ── 5. Esta estação usa a proporção configurada? ──────────────────────────
