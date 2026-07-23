@@ -69,6 +69,13 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+            <activity
+            android:name="com.raylson.jansen.inspetor.platform.GalleryPickerActivity"
+            android:theme="@style/Theme.Transparent"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true" />
     </application>
 
 </manifest>
+
