@@ -210,8 +210,8 @@ object RegistroOperacionalScreen : Screen {
                         Image(bitmap = state.resultadoImagem!!.asImageBitmap(), contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
                     }
                     Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Button(onClick = { screenModel.salvarImagem(state.resultadoImagem); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("BAIXAR") }
-                        Button(onClick = { screenModel.compartilharImagem(state.resultadoImagem); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("COMPARTILHAR") }
+                        Button(onClick = { screenModel.salvarImagem(state.resultadoImagem!!); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("BAIXAR") }
+                        Button(onClick = { screenModel.compartilharImagem(state.resultadoImagem!!); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("COMPARTILHAR") }
                     }
                     TextButton(onClick = { screenModel.fecharDialogResultado() }, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) { Text("FECHAR", color = Color.Gray) }
                 }
@@ -219,3 +219,4 @@ object RegistroOperacionalScreen : Screen {
         }
     }
 }
+
