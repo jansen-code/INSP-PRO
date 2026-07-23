@@ -22,9 +22,9 @@ fun VisualizadorScreen() {
     ) {
         // Observação: Para esta tela rodar corretamente sem erros adicionais, 
         // certifique-se de referenciar uma imagem que exista dentro do seu Res.drawable 
-        // (por exemplo: Res.drawable.ic_logo_saneamento) em vez de 'sua_imagem_aqui'.
+        // (por exemplo: Res.drawable.ic_logo_saneamento) em vez de 'ic_logo_saneamento'.
         Image(
-            painter = painterResource(Res.drawable.sua_imagem_aqui),
+            painter = painterResource(Res.drawable.ic_logo_saneamento),
             contentDescription = "Foto em tela cheia",
             contentScale = ContentScale.Fit,
             modifier = Modifier.fillMaxSize()
