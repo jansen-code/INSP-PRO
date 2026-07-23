@@ -60,14 +60,16 @@ object RegistroOperacionalScreen : Screen {
             }
         }
 
+        // --- AQUI ESTÁ A CORREÇÃO DA PONTE DA CÂMERA ---
         LaunchedEffect(state.pedidoAbrirCameraIndex) {
             if (state.pedidoAbrirCameraIndex >= 0) {
                 val prefs = context.getSharedPreferences("Configuracoes", Context.MODE_PRIVATE)
-                prefs.edit().putString("pref_proporcao", "4:5").apply()
+                val proporcaoSalva = prefs.getString("pref_proporcao", "4:5")
 
-                // O Truque KMP: Chama a Activity antiga pelo nome do pacote sem importar a classe diretamente
                 val intent = Intent().setClassName(context.packageName, "com.raylson.jansen.inspetor.CameraCaptureActivity").apply {
-                    putExtra("extra_ratio", "4:5")
+                    putExtra("extra_ratio", proporcaoSalva)
+                    // Informa a câmera que estamos no DET-01 para habilitar a guia da bomba
+                    putExtra("extra_mostrar_mira", state.estacaoAtual == "DET-01")
                 }
                 cameraLauncher.launch(intent)
                 screenModel.confirmarCameraAberta()
@@ -219,4 +221,3 @@ object RegistroOperacionalScreen : Screen {
         }
     }
 }
-
