@@ -7,6 +7,7 @@ import com.raylson.jansen.inspetor.domain.Estacao
 import com.raylson.jansen.inspetor.domain.ItemHm
 import com.raylson.jansen.inspetor.domain.LagoNA
 import com.raylson.jansen.inspetor.platform.OverlayRenderer
+import com.raylson.jansen.inspetor.platform.RegistroGerado
 import com.raylson.jansen.inspetor.platform.SecureStorage
 import com.raylson.jansen.inspetor.platform.createSecureStorage
 import com.raylson.jansen.inspetor.platform.shareImage
@@ -38,7 +39,7 @@ sealed class DashboardDialog {
     object EscolhaOrigemFoto : DashboardDialog()
     object ExcluirFoto : DashboardDialog()
     data class EditarDataHora(val horaAtual: String, val horaOriginal: String) : DashboardDialog()
-    data class ResultadoRegistro(val comTarjaLabel: String) : DashboardDialog()
+    data class ResultadoRegistro(val resultado: RegistroGerado) : DashboardDialog()
 }
 
 data class DashboardUiState(
@@ -248,10 +249,10 @@ class DashboardScreenModel : ScreenModel {
             val resultado = when {
                 atual.isModoNA -> {
                     val lago = atual.lagoAtual ?: return@launch
-                    OverlayRenderer.gerarRegistroNA(lago, lago.valor, lago.dataHora)
+                    OverlayRenderer.gerarRegistroNA(lago, lago.valor, lago.dataHora, atual.foraDeNA)
                 }
-                item.tipo == "LIVRE" -> OverlayRenderer.gerarRegistroLivre(item)
-                else -> OverlayRenderer.gerarRegistroHm(item)
+                item.tipo == "LIVRE" -> OverlayRenderer.gerarRegistroLivre(item, atual.statusBomba)
+                else -> OverlayRenderer.gerarRegistroHm(item, atual.itensAtuais, atual.estacaoSelecionada.nome, atual.statusBomba)
             }
 
             // Aqui entraria a chamada de persistência no histórico
@@ -263,7 +264,7 @@ class DashboardScreenModel : ScreenModel {
             _state.update {
                 it.copy(
                     gerandoRegistro = false,
-                    dialogAtivo = DashboardDialog.ResultadoRegistro(comTarjaLabel = "Registro gerado")
+                    dialogAtivo = DashboardDialog.ResultadoRegistro(resultado)
                 )
             }
         }

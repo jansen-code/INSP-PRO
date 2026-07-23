@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
@@ -25,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
 
-// Importação corrigida
 import inspetor.shared.generated.resources.Res
 import inspetor.shared.generated.resources.ic_logo_saneamento
 
@@ -34,9 +31,34 @@ val TextoEscuro = Color(0xFF111827)
 val TextoDica = Color(0xFF9CA3AF)
 val FundoInput = Color(0xFFF3F4F6)
 
+/**
+ * ═══════════════════════════════════════════════════════════════════
+ * OnboardingScreen.kt
+ *
+ * ═══ MUDANÇA (aditiva, nada removido) ═══
+ * Os 4 parâmetros abaixo são opcionais com defaults que reproduzem
+ * EXATAMENTE o comportamento original (estado interno via `remember`,
+ * `println` no clique). Chamado sem argumentos — `OnboardingScreen()` —
+ * continua se comportando 100% como antes.
+ *
+ * Quando chamado pelo `OnboardingRoute` (Voyager), os 4 parâmetros são
+ * passados de fato, e a tela vira "controlada": o valor do campo, a
+ * mensagem de erro e o clique do botão passam a vir do
+ * `OnboardingScreenModel` em vez do estado local.
+ * ═══════════════════════════════════════════════════════════════════
+ */
 @Composable
-fun OnboardingScreen() {
-    var apelido by remember { mutableStateOf("") }
+fun OnboardingScreen(
+    apelido: String? = null,
+    onApelidoChange: ((String) -> Unit)? = null,
+    erro: String? = null,
+    onConfirmar: (String) -> Unit = { println("Apelido digitado: $it") }
+) {
+    // Estado interno só é usado quando ninguém "controla" a tela de fora
+    // (mesmo fallback de sempre — Regra de Ouro: comportamento antigo intacto).
+    var apelidoInterno by remember { mutableStateOf("") }
+    val valorAtual = apelido ?: apelidoInterno
+    val mudarValor: (String) -> Unit = onApelidoChange ?: { apelidoInterno = it }
 
     Column(
         modifier = Modifier
@@ -49,14 +71,21 @@ fun OnboardingScreen() {
         LogoContainer()
         Spacer(modifier = Modifier.height(64.dp))
         OnboardingInput(
-            value = apelido,
-            onValueChange = { apelido = it }
+            value = valorAtual,
+            onValueChange = mudarValor
         )
+        if (erro != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = erro,
+                color = Color(0xFFDC2626),
+                fontSize = 13.sp,
+                modifier = Modifier.padding(horizontal = 36.dp)
+            )
+        }
         Spacer(modifier = Modifier.height(32.dp))
         MonitorButton(
-            onClick = { 
-                println("Apelido digitado: $apelido") 
-            }
+            onClick = { onConfirmar(valorAtual) }
         )
     }
 }

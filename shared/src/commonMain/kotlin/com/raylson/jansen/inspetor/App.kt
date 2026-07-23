@@ -3,6 +3,8 @@ package com.raylson.jansen.inspetor
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import com.raylson.jansen.inspetor.ui.screens.DashboardScreen
+import com.raylson.jansen.inspetor.ui.screens.OnboardingRoute
+import com.raylson.jansen.inspetor.ui.screens.OnboardingScreenModel
 
 /**
  * ═══════════════════════════════════════════════════════════════════
@@ -10,6 +12,11 @@ import com.raylson.jansen.inspetor.ui.screens.DashboardScreen
  *
  * Ponto único de navegação, no lugar de cada tela chamar
  * `startActivity(Intent(this, XActivity::class.java))`.
+ *
+ * A tela raiz é decidida como no launcher original: se
+ * "onboarding_concluido" ainda não foi salvo, começa no Onboarding;
+ * senão, direto no Dashboard (era o `if` dentro de MainActivity/
+ * SplashScreen que escolhia `OnboardingActivity` vs `DashboardActivity`).
  *
  * Regras de navegação pedidas:
  * ─────────────────────────────────────────────────────────────────
@@ -26,15 +33,11 @@ import com.raylson.jansen.inspetor.ui.screens.DashboardScreen
  *     (usado pelo btnLimparGeral / navegação "home" — limpa a pilha
  *     inteira de uma vez, sem precisar de N popUp() em sequência)
  * ─────────────────────────────────────────────────────────────────
- *
- * Esses três padrões já estão aplicados dentro de
- * `HistoricoScreen`/`ControleNAScreen` (ver comentário de exemplo
- * abaixo) — aqui só criamos o `Navigator` raiz.
- * ═══════════════════════════════════════════════════════════════════
  */
 @Composable
 fun App() {
-    Navigator(screen = DashboardScreen)
+    val telaInicial = if (OnboardingScreenModel.onboardingJaConcluido()) DashboardScreen else OnboardingRoute
+    Navigator(screen = telaInicial)
 }
 
 /*

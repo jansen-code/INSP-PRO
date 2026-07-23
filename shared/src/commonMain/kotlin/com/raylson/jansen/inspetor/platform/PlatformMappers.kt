@@ -54,25 +54,54 @@ expect fun shareImage(bytes: ByteArray, label: String)
  * (Android usa android.graphics.Canvas; iOS usaria Skia/CoreGraphics).
  * A LÓGICA de "quais dados vão em qual camada" fica no ScreenModel
  * (commonMain); só o "como desenhar pixel a pixel" fica aqui.
+ *
+ * Os parâmetros extras (itensDaEstacao, estacaoNome, statusBomba,
+ * foraDeNA) são necessários porque a implementação original
+ * (gerarParBitmapRegistro/gerarParImagemFinalNA/gerarParImagemFinalLivre)
+ * lê vários campos da Activity além do item/lago em si — ex.: o SIFÃO
+ * busca o item irmão ("SIF-SUP"/"SIF-INF") na lista completa da estação.
  */
 expect object OverlayRenderer {
 
-    /** Equivalente a `gerarParBitmapRegistro` / `gerarParBitmapRegistroEmpilhado`. */
-    fun gerarRegistroHm(item: ItemHm, horaOverride: String? = null): RegistroGerado
+    /** Equivalente a `gerarParBitmapRegistro` / `gerarParBitmapRegistroEmpilhado` / `gerarParBitmapRegistroSimplesStatus`. */
+    fun gerarRegistroHm(
+        item: ItemHm,
+        itensDaEstacao: List<ItemHm>,
+        estacaoNome: String,
+        statusBomba: String,
+        horaOverride: String? = null
+    ): RegistroGerado
 
-    /** Equivalente a `gerarParImagemFinalNA`. */
-    fun gerarRegistroNA(lago: LagoNA, valorNA: String?, horaOverride: String): RegistroGerado
+    /** Equivalente a `gerarParImagemFinalNA` (usa `gerarOverlayNA` por baixo). */
+    fun gerarRegistroNA(
+        lago: LagoNA,
+        valorNA: String?,
+        horaOverride: String,
+        foraDeNA: Boolean
+    ): RegistroGerado
 
-    /** Equivalente a `gerarParImagemFinalLivre`. */
-    fun gerarRegistroLivre(item: ItemHm, horaOverride: String? = null): RegistroGerado
+    /** Equivalente a `gerarParImagemFinalLivre` (usa `gerarOverlayLivre` por baixo). */
+    fun gerarRegistroLivre(
+        item: ItemHm,
+        statusBomba: String,
+        horaOverride: String? = null
+    ): RegistroGerado
 }
 
 /**
- * Par (com tarja + limpa) que o app sempre gerou — era
- * `Pair<Bitmap, Bitmap>` / `Triple<Bitmap, Bitmap, Bitmap>` espalhado
- * pelo código original. Um único tipo nomeado deixa a intenção clara.
+ * As 3 camadas que o app sempre gerou — era
+ * `Triple<Bitmap, Bitmap, Bitmap>` (limpa, overlay, final) espalhado
+ * pelo código original. Nomeado explicitamente em vez de posicional:
+ *
+ * • limpa   = foto(s) montada(s) no canvas preto, SEM tarja — é o que
+ *   a régua de brilho/nitidez/vetorização edita.
+ * • overlay = bitmap transparente com APENAS a(s) tarja(s) — nunca é
+ *   filtrado, é desenhado por cima da `limpa` já editada.
+ * • final   = fusão pronta de limpa + overlay — o que aparece no
+ *   preview inicial do diálogo de resultado.
  */
 data class RegistroGerado(
-    val comTarja: ByteArray,
-    val limpa: ByteArray
+    val limpa: ByteArray,
+    val overlay: ByteArray,
+    val final: ByteArray
 )
