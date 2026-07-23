@@ -41,6 +41,8 @@ kotlin {
     
     sourceSets {
         androidMain.dependencies {
+            implementation("androidx.activity:activity-ktx:1.8.2")
+            implementation("androidx.exifinterface:exifinterface:1.3.7")
             implementation("androidx.security:security-crypto:1.1.0-alpha06")
             implementation("androidx.core:core-ktx:1.13.1")
             implementation(libs.compose.uiToolingPreview)
@@ -69,4 +71,5 @@ kotlin {
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
 }
+
 
