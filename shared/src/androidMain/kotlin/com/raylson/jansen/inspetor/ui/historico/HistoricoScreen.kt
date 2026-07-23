@@ -184,3 +184,4 @@ object HistoricoScreen : Screen {
         }
     }
 }
+
