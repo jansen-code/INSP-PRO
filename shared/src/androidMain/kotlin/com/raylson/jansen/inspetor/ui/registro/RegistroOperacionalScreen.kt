@@ -32,7 +32,6 @@ import androidx.compose.ui.window.DialogProperties
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import com.raylson.jansen.inspetor.CameraCaptureActivity
 import com.raylson.jansen.inspetor.ImageHelper
 
 object RegistroOperacionalScreen : Screen {
@@ -66,7 +65,8 @@ object RegistroOperacionalScreen : Screen {
                 val prefs = context.getSharedPreferences("Configuracoes", Context.MODE_PRIVATE)
                 prefs.edit().putString("pref_proporcao", "4:5").apply()
 
-                val intent = Intent(context, CameraCaptureActivity::class.java).apply {
+                // O Truque KMP: Chama a Activity antiga pelo nome do pacote sem importar a classe diretamente
+                val intent = Intent().setClassName(context.packageName, "com.raylson.jansen.inspetor.CameraCaptureActivity").apply {
                     putExtra("extra_ratio", "4:5")
                 }
                 cameraLauncher.launch(intent)
@@ -210,8 +210,8 @@ object RegistroOperacionalScreen : Screen {
                         Image(bitmap = state.resultadoImagem!!.asImageBitmap(), contentDescription = null, modifier = Modifier.fillMaxSize(), contentScale = ContentScale.Fit)
                     }
                     Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                        Button(onClick = { screenModel.salvarImagem(state.resultadoImagem!!); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("BAIXAR") }
-                        Button(onClick = { screenModel.compartilharImagem(state.resultadoImagem!!); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("COMPARTILHAR") }
+                        Button(onClick = { screenModel.salvarImagem(state.resultadoImagem); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("BAIXAR") }
+                        Button(onClick = { screenModel.compartilharImagem(state.resultadoImagem); screenModel.fecharDialogResultado() }, modifier = Modifier.weight(1f).height(48.dp)) { Text("COMPARTILHAR") }
                     }
                     TextButton(onClick = { screenModel.fecharDialogResultado() }, modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp)) { Text("FECHAR", color = Color.Gray) }
                 }
