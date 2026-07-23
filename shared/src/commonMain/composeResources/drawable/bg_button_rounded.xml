@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Fundo do botão MONITORAR.
+    Azul vibrante (mesma família do tint da logo) com cantos arredondados
+    e estado de "pressionado" mais escuro para feedback tátil.
+    Coloque em: app/src/main/res/drawable/bg_button_rounded.xml
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Estado pressionado -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="#1D4ED8" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+
+    <!-- Estado desabilitado -->
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <solid android:color="#93C5FD" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+
+    <!-- Estado normal -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#2563EB" />
+            <corners android:radius="14dp" />
+        </shape>
+    </item>
+
+</selector>

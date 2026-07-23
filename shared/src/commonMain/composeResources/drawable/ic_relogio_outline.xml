@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ic_relogio_outline.xml
+    ════════════════════════════════════════════════════════
+    Ícone do relógio do cabeçalho do Histórico — círculo
+    outline azul com dois ponteiros, mesmo estilo da imagem
+    de referência. Usado como android:src de
+    @id/btn_relogio_estado (a animação de rotação no clique
+    permanece inalterada — ela gira a própria ImageView).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Círculo externo -->
+    <path
+        android:pathData="M12,2 C17.52,2 22,6.48 22,12 C22,17.52 17.52,22 12,22 C6.48,22 2,17.52 2,12 C2,6.48 6.48,2 12,2 Z"
+        android:strokeColor="#ffffff"
+        android:strokeWidth="1.6"
+        android:fillColor="#00000000"/>
+
+    <!-- Ponteiro das horas -->
+    <path
+        android:pathData="M12,12 L12,7"
+        android:strokeColor="#ffffff"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"/>
+
+    <!-- Ponteiro dos minutos -->
+    <path
+        android:pathData="M12,12 L15.5,13.6"
+        android:strokeColor="#ffffff"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000"/>
+
+</vector>

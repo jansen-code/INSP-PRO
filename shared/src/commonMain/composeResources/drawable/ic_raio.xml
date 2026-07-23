@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="540dp"
+    android:height="980dp"
+    android:viewportWidth="90"
+    android:viewportHeight="190">
+
+    <!-- 1. CAMADA DE TRÁS: A forma sólida amarela (deslocada para a direita e para cima) -->
+    <path
+        android:fillColor="#FFD214"
+        android:pathData="M52,19 L99,22 L51,81 L87,83 L25,166 L47,105 L16,110 Z" />
+
+    <!-- 2. CAMADA DA FRENTE: O contorno preto geométrico (Vazado/Sem preenchimento) -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="4.5"
+        android:strokeLineJoin="miter"
+        android:strokeLineCap="square"
+        android:fillColor="#00000000"
+        android:pathData="M43,14 L90,17 L42,76 L78,78 L16,161 L38,100 L7,105 Z" />
+
+</vector>

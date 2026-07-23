@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/topBarDialogNA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="18dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="N.A."
+                    android:textColor="#2563EB"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTRO PROCESSADO"
+                    android:textColor="#0F172A"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnFecharDialogNA"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="#94A3B8"
+                android:padding="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"/>
+        </LinearLayout>
+
+        <!-- ═══ Espaçador elástico ACIMA da foto: some quando falta espaço
+             (teclado aberto), sem nunca encolher a foto em si. Mantém a foto
+             centralizada verticalmente quando há espaço de sobra. ═══ -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/imgResultadoNA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter" />
+
+            <ImageView
+                android:id="@+id/imgResultadoOverlayNA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:clickable="false"
+                android:focusable="false"
+                android:importantForAccessibility="no" />
+
+            <com.raylson.jansen.inspetor.ReguaVerticalView
+                android:id="@+id/reguaEdicaoDialogNA"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="top" />
+
+            <ImageView
+                android:id="@+id/btnResetZoom"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/bg_circle_back_outlined"
+                android:padding="6dp"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="#2563EB"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <!-- ═══ Espaçador elástico ABAIXO da foto: absorve o espaço sobrando
+             e é o primeiro a ceder espaço quando o teclado abre. ═══ -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/layoutBotoesInferioresNA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingBottom="18dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F1F5F9"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="12dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="VALOR DO N.A."
+                        android:textColor="#94A3B8"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.08" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        app:cardBackgroundColor="#EFF6FF"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:id="@+id/tvZoomLevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="100%"
+                            android:textColor="#2563EB"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/etValorNA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="00.00m"
+                    android:inputType="number"
+                    android:textColor="#0F172A"
+                    android:textSize="32sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvStatusForaNA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="N.A. FORA DA RÉGUA — campo inativo"
+                    android:textColor="#EF4444"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    app:cardBackgroundColor="#F97316"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/btnEditarHoraNA"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Editar data e hora"
+                        android:src="@android:drawable/ic_menu_recent_history"
+                        app:tint="#FFFFFF" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#2563EB"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <Button
+                        android:id="@+id/btnBaixarNA"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingHorizontal="4dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.01"
+                        android:maxLines="1"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="9sp"
+                        android:autoSizeMaxTextSize="13sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:text="BAIXAR"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="#EFF6FF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+
+                    <Button
+                        android:id="@+id/btnCompartilharNA"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minWidth="0dp"
+                        android:minHeight="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingHorizontal="4dp"
+                        android:gravity="center"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.01"
+                        android:maxLines="1"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="9sp"
+                        android:autoSizeMaxTextSize="13sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:text="COMPARTILHAR"
+                        android:textColor="#2563EB"
+                        android:textStyle="bold" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

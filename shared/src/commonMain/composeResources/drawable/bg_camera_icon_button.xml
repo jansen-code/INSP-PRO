@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Fundo circular translúcido usado nos botões-ícone da topbar da câmera
+    (fechar, grid e guia de enquadramento). Combinado com o
+    android:foreground="?attr/selectableItemBackgroundBorderless" no próprio
+    ImageView/TextView, garante o ripple de toque por cima do círculo.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#33000000" />
+</shape>

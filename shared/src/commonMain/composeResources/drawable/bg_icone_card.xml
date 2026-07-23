@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    bg_icone_card.xml
+    ════════════════════════════════════════════════════════
+    Fundo cinza muito claro (#F3F5F8), bordas arredondadas,
+    usado por trás do ícone vetorial da régua dentro de cada
+    card do grid do Histórico.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="#F3F5F8"/>
+
+    <corners android:radius="14dp"/>
+
+</shape>
