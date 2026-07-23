@@ -66,6 +66,14 @@ class HistoricoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val itemToEdit = intent.getStringExtra("EDIT_ITEM")
+        if (itemToEdit != null) {
+            val emptyView = View(this).apply { setBackgroundColor(Color.TRANSPARENT) }
+            setContentView(emptyView)
+            window.setBackgroundDrawableResource(android.R.color.transparent)
+            abrirPreviewDoRegistro(itemToEdit)
+            return
+        }
         window.statusBarColor = Color.WHITE
         @Suppress("DEPRECATION")
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -843,6 +851,7 @@ class HistoricoActivity : AppCompatActivity() {
             }
         }
 
+        dialog.setOnDismissListener { if (intent.getStringExtra("EDIT_ITEM") != null) finish() }
         dialog.show()
 
         dialog.window?.apply {
