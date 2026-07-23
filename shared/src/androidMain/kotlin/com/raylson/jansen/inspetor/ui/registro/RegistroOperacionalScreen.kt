@@ -1,7 +1,6 @@
 package com.raylson.jansen.inspetor.ui.registro
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -60,15 +59,14 @@ object RegistroOperacionalScreen : Screen {
             }
         }
 
-        // --- AQUI ESTÁ A CORREÇÃO DA PONTE DA CÂMERA ---
         LaunchedEffect(state.pedidoAbrirCameraIndex) {
             if (state.pedidoAbrirCameraIndex >= 0) {
-                val prefs = context.getSharedPreferences("Configuracoes", Context.MODE_PRIVATE)
-                val proporcaoSalva = prefs.getString("pref_proporcao", "4:5")
+                try {
+                    val file = java.io.File(context.applicationInfo.dataDir, "shared_prefs/Configuracoes.xml")
+                    if (file.exists()) file.delete()
+                } catch (_: Exception) {}
 
                 val intent = Intent().setClassName(context.packageName, "com.raylson.jansen.inspetor.CameraCaptureActivity").apply {
-                    putExtra("extra_ratio", proporcaoSalva)
-                    // Informa a câmera que estamos no DET-01 para habilitar a guia da bomba
                     putExtra("extra_mostrar_mira", state.estacaoAtual == "DET-01")
                 }
                 cameraLauncher.launch(intent)
