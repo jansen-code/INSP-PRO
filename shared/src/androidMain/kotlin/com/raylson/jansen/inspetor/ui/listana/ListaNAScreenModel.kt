@@ -282,7 +282,8 @@ class ListaNAScreenModel(private val appContext: Context) : ScreenModel {
                     if (obj.optString("grupo") == "N.A." && obj.optString("subtitulo").equals(local.buscaHistorico, true)) {
                         local.foiRegistrado = true
                         local.dataHora = obj.optString("dataHora", "")
-                        local.valor = obj.optString("valorNA", null)
+                        local.valor = obj.optString("valorNA", "")
+                        if (local.valor.isNullOrEmpty()) local.valor = null
                         break
                     }
                 }

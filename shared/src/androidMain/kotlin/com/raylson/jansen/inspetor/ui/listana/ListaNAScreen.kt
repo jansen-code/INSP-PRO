@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import androidx.compose.ui.window.DialogProperties
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -348,54 +349,47 @@ private fun EditDialog(
         onDismissRequest = onDismiss,
         containerColor = Color.White,
         shape = RoundedCornerShape(18.dp),
-        properties = DialogProperties(usePlatformDefaultWidth = false)
-    ) {
-        Card(
-            shape = RoundedCornerShape(18.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(28.dp)
-        ) {
-            Column(modifier = Modifier.padding(horizontal = 22.dp, vertical = 22.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(modifier = Modifier.weight(1f)) {
-                        Text(
-                            text = "EDI\u00C7\u00C3O MANUAL",
-                            color = Color(0xFF94A3B8),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            letterSpacing = 1.8.sp
-                        )
-                        Text(
-                            text = item.tituloVisual,
-                            color = Color(0xFF1E293B),
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(top = 2.dp)
-                        )
-                    }
-                    Box(
-                        modifier = Modifier
-                            .size(34.dp)
-                            .clip(CircleShape)
-                            .background(Color(0xFFEFF6FF))
-                            .clickable { onRestore() },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = "\u21BA", color = Color(0xFF2563EB), fontSize = 18.sp)
-                    }
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+        title = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "EDI\u00C7\u00C3O MANUAL",
+                        color = Color(0xFF94A3B8),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.8.sp
+                    )
+                    Text(
+                        text = item.tituloVisual,
+                        color = Color(0xFF1E293B),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(top = 2.dp)
+                    )
                 }
-
+                Box(
+                    modifier = Modifier
+                        .size(34.dp)
+                        .clip(CircleShape)
+                        .background(Color(0xFFEFF6FF))
+                        .clickable { onRestore() },
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "\u21BA", color = Color(0xFF2563EB), fontSize = 18.sp)
+                }
+            }
+        },
+        text = {
+            Column {
                 Text(
                     text = "Voc\u00EA poder\u00E1 restaurar para PENDENTE",
                     color = Color(0xFF94A3B8),
                     fontSize = 12.sp,
-                    modifier = Modifier.padding(top = 4.dp, bottom = 18.dp)
+                    modifier = Modifier.padding(bottom = 18.dp)
                 )
 
                 Text(
@@ -524,53 +518,54 @@ private fun EditDialog(
                     color = Color(0xFFF1F5F9),
                     modifier = Modifier.padding(top = 16.dp, bottom = 22.dp)
                 )
-
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Card(
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFFEFF6FF)),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(end = 6.dp)
+            }
+        },
+        confirmButton = {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFEFF6FF)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 6.dp)
+                ) {
+                    TextButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        TextButton(
-                            onClick = onDismiss,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "CANCELAR",
-                                color = Color(0xFF2563EB),
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
+                        Text(
+                            text = "CANCELAR",
+                            color = Color(0xFF2563EB),
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
+                }
 
-                    Card(
-                        shape = RoundedCornerShape(12.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF2563EB)),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 6.dp)
+                Card(
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFF2563EB)),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 6.dp)
+                ) {
+                    TextButton(
+                        onClick = { onSave(valor, data, hora) },
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        TextButton(
-                            onClick = { onSave(valor, data, hora) },
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = "SALVAR",
-                                color = Color.White,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
+                        Text(
+                            text = "SALVAR",
+                            color = Color.White,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
                 }
             }
         }
-    }
+    )
 }
 
 @Composable
