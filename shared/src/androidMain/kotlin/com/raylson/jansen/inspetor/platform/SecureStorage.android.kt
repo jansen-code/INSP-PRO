@@ -1,6 +1,7 @@
 package com.raylson.jansen.inspetor.platform
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
@@ -74,3 +75,4 @@ actual fun createSecureStorage(name: String): SecureStorage = AndroidSecureStora
  * guarda NSData/String nativamente).
  * ─────────────────────────────────────────────────────────────────
  */
+

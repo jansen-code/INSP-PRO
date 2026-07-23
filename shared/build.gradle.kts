@@ -41,10 +41,13 @@ kotlin {
     
     sourceSets {
         androidMain.dependencies {
+            implementation("androidx.security:security-crypto:1.1.0-alpha06")
+            implementation("androidx.core:core-ktx:1.13.1")
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.compose.uiTooling)
         }
         commonMain.dependencies {
+            implementation(compose.materialIconsExtended)
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
@@ -66,3 +69,4 @@ kotlin {
 dependencies {
     androidRuntimeClasspath(libs.compose.uiTooling)
 }
+
