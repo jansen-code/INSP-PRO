@@ -15,7 +15,7 @@ import android.os.VibratorManager
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
-import com.raylson.jansen.inspetor.ConfiguracoesActivity
+
 import com.raylson.jansen.inspetor.ImageHelper
 import com.raylson.jansen.inspetor.domain.ItemHm
 import com.raylson.jansen.inspetor.domain.LagoNA
@@ -212,7 +212,7 @@ actual object OverlayRenderer {
 
     private fun calcularAlturasEmpilhadas(fotoSup: Bitmap?, fotoInf: Bitmap?, canvasW: Int): Pair<Int, Int> {
         val context = AndroidContextHolder.appContext
-        if (ImageHelper.lerProporcao(context) == ConfiguracoesActivity.PROP_FULL) {
+        if (ImageHelper.lerProporcao(context) == "full") {
             fun alturaPorFoto(foto: Bitmap?): Int {
                 val f = foto ?: return (canvasW * 5 / 4) / 2
                 val ratio = f.width.toFloat() / f.height.toFloat()
@@ -221,10 +221,10 @@ actual object OverlayRenderer {
             return alturaPorFoto(fotoSup) to alturaPorFoto(fotoInf)
         }
         val meia = when (ImageHelper.lerProporcao(context)) {
-            ConfiguracoesActivity.PROP_4x5 -> (canvasW * 5) / 4 / 2
-            ConfiguracoesActivity.PROP_3x4 -> (canvasW * 4) / 3 / 2
-            ConfiguracoesActivity.PROP_9x16 -> (canvasW * 16) / 9 / 2
-            ConfiguracoesActivity.PROP_1x1 -> canvasW / 2
+            "4:5" -> (canvasW * 5) / 4 / 2
+            "3:4" -> (canvasW * 4) / 3 / 2
+            "9:16" -> (canvasW * 16) / 9 / 2
+            "1:1" -> canvasW / 2
             else -> canvasW / 2
         }
         return meia to meia
@@ -362,15 +362,15 @@ actual object OverlayRenderer {
         val bmpFoto = fotoSup ?: Bitmap.createBitmap(W, 100, Bitmap.Config.ARGB_8888)
         val proporcao = ImageHelper.lerProporcao(context)
 
-        val alturaFinal = if (proporcao == ConfiguracoesActivity.PROP_FULL) {
+        val alturaFinal = if (proporcao == "full") {
             val ratio = bmpFoto.width.toFloat() / bmpFoto.height.toFloat()
             (W / ratio).toInt().coerceIn(600, 4320)
         } else {
             when (proporcao) {
-                ConfiguracoesActivity.PROP_4x5 -> (W * 5) / 4
-                ConfiguracoesActivity.PROP_3x4 -> (W * 4) / 3
-                ConfiguracoesActivity.PROP_9x16 -> (W * 16) / 9
-                ConfiguracoesActivity.PROP_1x1 -> W
+                "4:5" -> (W * 5) / 4
+                "3:4" -> (W * 4) / 3
+                "9:16" -> (W * 16) / 9
+                "1:1" -> W
                 else -> (W * 5) / 4
             }
         }
@@ -649,3 +649,4 @@ actual object OverlayRenderer {
         return RegistroGerado(bmpLimpo.toJpegBytes(), bmpOverlay.toJpegBytes(), bmpFinal.toJpegBytes())
     }
 }
+

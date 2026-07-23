@@ -97,7 +97,7 @@ object ImageHelper {
     //  chamar novamente — a foto já chega cortada.
 
     fun recortarPorProporcao(bitmap: Bitmap, proporcao: String): Bitmap {
-        if (proporcao == ConfiguracoesActivity.PROP_FULL) return bitmap
+        if (proporcao == "full") return bitmap
 
         val srcW = bitmap.width.toFloat()
         val srcH = bitmap.height.toFloat()
@@ -114,7 +114,7 @@ object ImageHelper {
 
         when (proporcao) {
             // ← NOVO: 4:5  →  altura = largura * 5/4
-            ConfiguracoesActivity.PROP_4x5 -> {
+            "4:5" -> {
                 val targetRatio = 4f / 5f   // largura/altura
                 if (srcW / srcH > targetRatio) {
                     // foto mais larga → corta as laterais
@@ -126,7 +126,7 @@ object ImageHelper {
                     dstH = (srcW / targetRatio).toInt().coerceAtLeast(1)
                 }
             }
-            ConfiguracoesActivity.PROP_3x4 -> {
+            "3:4" -> {
                 val targetRatio = 3f / 4f
                 if (srcW / srcH > targetRatio) {
                     dstH = srcH.toInt()
@@ -136,7 +136,7 @@ object ImageHelper {
                     dstH = (srcW / targetRatio).toInt().coerceAtLeast(1)
                 }
             }
-            ConfiguracoesActivity.PROP_9x16 -> {
+            "9:16" -> {
                 val targetRatio = 9f / 16f
                 if (srcW / srcH > targetRatio) {
                     dstH = srcH.toInt()
@@ -146,7 +146,7 @@ object ImageHelper {
                     dstH = (srcW / targetRatio).toInt().coerceAtLeast(1)
                 }
             }
-            ConfiguracoesActivity.PROP_1x1 -> {
+            "1:1" -> {
                 val lado = minOf(srcW, srcH).toInt().coerceAtLeast(1)
                 dstW = lado; dstH = lado
             }
@@ -193,12 +193,12 @@ object ImageHelper {
     fun lerProporcao(context: Context): String {
         val prefs = SecurePrefs.get(
             context,
-            ConfiguracoesActivity.PREFS_NAME
+            "Configuracoes"
         )
         return prefs.getString(
-            ConfiguracoesActivity.PREF_PROPORCAO,
-            ConfiguracoesActivity.PROP_4x5   // ← default atualizado
-        ) ?: ConfiguracoesActivity.PROP_4x5
+            "pref_proporcao",
+            "4:5"   // ← default atualizado
+        ) ?: "4:5"
     }
 
     // ── 5. Esta estação usa a proporção configurada? ──────────────────────────
@@ -331,3 +331,4 @@ object ImageHelper {
         } catch (_: Exception) {}
     }
 }
+
