@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Tela de Onboarding (DIGITE SEU NOME / APELIDO)
+    Design inspirado no mockup LOGIN UI, adaptado para:
+      - Fundo branco
+      - Logo do app dentro de um círculo (substituindo a pessoinha)
+      - Apenas UM campo (nome/apelido), limpo e elegante
+      - Botão MONITORAR azul vibrante e arredondado
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
+
+    <!-- ============================================== -->
+    <!-- LOGO DENTRO DE UM CÍRCULO BRANCO COM TRACEJADO  -->
+    <!-- ============================================== -->
+    <FrameLayout
+        android:id="@+id/flLogoContainer"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_logo_dashed_circle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Círculo branco interno (com sombra leve via elevation) -->
+        <View
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_logo_inner_circle"
+            android:elevation="6dp" />
+
+        <!-- A logo do app, centralizada dentro do círculo -->
+        <ImageView
+            android:id="@+id/ivLogoSimple"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:elevation="8dp"
+            android:src="@drawable/ic_logo_saneamento"
+            app:tint="#2563EB"
+            android:scaleType="fitCenter"
+            android:contentDescription="Logo INSPETOR" />
+    </FrameLayout>
+
+    <!-- ============================================== -->
+    <!-- CAMPO ÚNICO: digite o nome/apelido              -->
+    <!-- ============================================== -->
+    <LinearLayout
+        android:id="@+id/llInputContainer"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="64dp" 
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:background="@drawable/bg_input_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flLogoContainer"> 
+
+        <EditText
+            android:id="@+id/etApelido"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="Como se chama?" 
+            android:textColorHint="#9CA3AF"
+            android:textColor="#111827"
+            android:textSize="16sp"
+            android:inputType="textPersonName|textCapWords"
+            android:maxLines="1"
+            android:background="@null"
+            android:imeOptions="actionDone"
+            android:fontFamily="@font/app_font_ui_regular"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <!-- ============================================== -->
+    <!-- BOTÃO MONITORAR                                 -->
+    <!-- ============================================== -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMonitorar"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="36dp"
+        android:text="MONITORAR"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.1"
+        android:fontFamily="@font/app_font_ui_medium"
+        android:stateListAnimator="@null"
+        android:background="@drawable/bg_button_rounded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llInputContainer" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="14dp"
+    android:paddingHorizontal="16dp"
+    android:gravity="center_vertical">
+
+    <!-- Container do Ícone (Igual à caixinha vermelha/amarela da foto) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCaixaIcone"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#FEF0EB"> <!-- Cor alterada via código -->
+
+        <ImageView
+            android:id="@+id/iconeRegistro"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:src="@android:drawable/ic_menu_camera"
+            android:scaleType="centerInside"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Textos Centrais -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+        
+        <TextView
+            android:id="@+id/nomeRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DET-01 / HM-01"
+            android:textColor="#0F172A"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"/>
+        
+        <TextView
+            android:id="@+id/valorRegistro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIGADA"
+            android:textColor="#0F172A"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif-bold"/>
+    </LinearLayout>
+
+    <!-- Data Lateral -->
+    <TextView
+        android:id="@+id/dataRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hoje"
+        android:textColor="#94A3B8"
+        android:textSize="12sp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="2dp"/>
+</LinearLayout>

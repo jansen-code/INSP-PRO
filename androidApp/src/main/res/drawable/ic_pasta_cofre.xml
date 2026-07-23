@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pasta delicada: corpo azul suave, aba e contorno em cinza — usada nos
+     cards da tela principal do Cofre. Desenhada do zero (sem ícone de
+     sistema) conforme pedido. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- corpo da pasta -->
+    <path
+        android:pathData="M3,6.5 C3,5.67 3.67,5 4.5,5 H9.2 C9.66,5 10.1,5.2 10.4,5.55 L11.6,7 H19.5 C20.33,7 21,7.67 21,8.5 V17.5 C21,18.33 20.33,19 19.5,19 H4.5 C3.67,19 3,18.33 3,17.5 Z"
+        android:fillColor="#DBEAFE" />
+
+    <!-- aba superior, cinza, "detalhe" pedido -->
+    <path
+        android:pathData="M3,6.5 C3,5.67 3.67,5 4.5,5 H9.2 C9.66,5 10.1,5.2 10.4,5.55 L11.6,7 H4.5 C3.67,7 3,7.4 3,8.1 Z"
+        android:fillColor="#94A3B8"
+        android:fillAlpha="0.55" />
+
+    <!-- contorno -->
+    <path
+        android:pathData="M3,6.5 C3,5.67 3.67,5 4.5,5 H9.2 C9.66,5 10.1,5.2 10.4,5.55 L11.6,7 H19.5 C20.33,7 21,7.67 21,8.5 V17.5 C21,18.33 20.33,19 19.5,19 H4.5 C3.67,19 3,18.33 3,17.5 Z"
+        android:strokeColor="#93C5FD"
+        android:strokeWidth="1"
+        android:fillColor="#00000000" />
+</vector>

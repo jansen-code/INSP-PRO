@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Círculo externo com borda tracejada (igual ao mockup LOGIN UI).
+    Coloque em: app/src/main/res/drawable/bg_logo_dashed_circle.xml
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#00000000" />
+    <stroke
+        android:width="1.5dp"
+        android:color="#BFDBFE"
+        android:dashWidth="6dp"
+        android:dashGap="4dp" />
+</shape>

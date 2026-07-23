@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <FrameLayout
+        android:id="@+id/previewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintDimensionRatio="H,3:4"
+        app:layout_constraintVertical_bias="0.5">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:implementationMode="performance"
+            app:scaleType="fillCenter" />
+
+        <com.raylson.jansen.inspetor.GuiaEnquadramentoView
+            android:id="@+id/guiaEnquadramento"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gridOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <View android:id="@+id/gridV1" android:layout_width="1dp" android:layout_height="match_parent" android:background="#66FFFFFF" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.333" />
+            <View android:id="@+id/gridV2" android:layout_width="1dp" android:layout_height="match_parent" android:background="#66FFFFFF" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.666" />
+            <View android:id="@+id/gridH1" android:layout_width="match_parent" android:layout_height="1dp" android:background="#66FFFFFF" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.333" />
+            <View android:id="@+id/gridH2" android:layout_width="match_parent" android:layout_height="1dp" android:background="#66FFFFFF" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.666" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.raylson.jansen.inspetor.FocoAnimadoView
+            android:id="@+id/focoAnimadoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <com.raylson.jansen.inspetor.ReguaVerticalView
+        android:id="@+id/reguaVerticalView"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBarLayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomBarLayout" />
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         TOPBAR — redesenhada: fundo do rootLayout já é preto/preview,
+         então os controles usam fundos translúcidos em "chip"/"pill"
+         para parecer flutuantes, elegantes e modernos sobre a câmera.
+
+         Ordem visual solicitada: Fechar (canto) | Grid — Guia — Proporção
+         (grupo central, com a Proporção em destaque laranja).
+
+         Todas as dimensões vêm de @dimen/camera_* (ver dimens_camera_topbar.xml),
+         com overrides automáticos em values-sw360dp para telas pequenas —
+         isso resolve a responsividade sem precisar de lógica em código.
+         ═══════════════════════════════════════════════════════════════ -->
+    <LinearLayout
+        android:id="@+id/topBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/camera_topbar_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/camera_topbar_padding_h"
+        android:paddingTop="@dimen/camera_topbar_padding_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Botão Fechar: círculo translúcido isolado no canto esquerdo -->
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/camera_close_btn_size"
+            android:layout_height="@dimen/camera_close_btn_size"
+            android:background="@drawable/bg_camera_icon_button"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/camera_close_icon_padding"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#FFFFFF"
+            android:contentDescription="Fechar câmera" />
+
+        <View
+            android:id="@+id/spacer1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Grupo central agrupado em formato "pill": Grid — Guia — Proporção -->
+        <LinearLayout
+            android:id="@+id/topBarActionGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_camera_toolbar_pill"
+            android:paddingHorizontal="@dimen/camera_group_padding_h"
+            android:paddingVertical="@dimen/camera_group_padding_v">
+
+            <!-- 1) Grid: canto esquerdo do grupo -->
+            <TextView
+                android:id="@+id/btnGrid"
+                android:layout_width="@dimen/camera_action_btn_size"
+                android:layout_height="@dimen/camera_action_btn_size"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="▦"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/camera_grid_icon_size"
+                android:includeFontPadding="false"
+                android:background="@drawable/bg_camera_icon_button"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Alternar grade" />
+
+            <!-- 2) Guia de enquadramento: entre o Grid e a Proporção -->
+            <ImageView
+                android:id="@+id/btnToggleGuia"
+                android:layout_width="@dimen/camera_action_btn_size"
+                android:layout_height="@dimen/camera_action_btn_size"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="@dimen/camera_group_item_margin"
+                android:src="@drawable/ic_guia_enquadramento"
+                app:tint="#FFFFFF"
+                android:padding="@dimen/camera_guia_icon_padding"
+                android:background="@drawable/bg_camera_icon_button"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="Alternar guia de enquadramento" />
+
+            <!-- 3) Proporção: chip em destaque (laranja da identidade visual) -->
+            <!-- ═══ CORREÇÃO: a largura do chip é fixa (dimensionada pra
+                 caber "3:4"/"4:5"/"9:16"/"1:1", todos com poucos caracteres
+                 estreitos), mas "FULL" é mais largo e quebrava linha em
+                 telas menores (Moto G30), aparecendo cortado como "FUL" +
+                 "L" embaixo. Agora o texto encolhe automaticamente (mesmo
+                 padrão já usado nos botões BAIXAR/COMPARTILHAR) só o
+                 suficiente pra caber SEMPRE em uma linha só, dentro da
+                 mesma largura fixa do chip — "3:4" etc. continuam do
+                 mesmo tamanho de sempre, só "FULL" fica um pouco menor. ═══ -->
+            <TextView
+                android:id="@+id/tvRatio"
+                android:layout_width="wrap_content"
+                android:minWidth="@dimen/camera_ratio_chip_width"
+                android:layout_height="@dimen/camera_ratio_chip_height"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/camera_ratio_chip_padding_h"
+                android:text="3:4"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/camera_ratio_text_size"
+                android:textStyle="bold"
+                android:letterSpacing="0.05"
+                android:maxLines="1"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="8sp"
+                android:autoSizeMaxTextSize="@dimen/camera_ratio_text_size"
+                android:autoSizeStepGranularity="1sp"
+                android:background="@drawable/bg_camera_ratio_chip"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Alternar proporção da foto" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/spacer2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Espaçador invisível simétrico ao botão Fechar, mantendo o
+             grupo central perfeitamente centralizado na topbar -->
+        <View
+            android:layout_width="@dimen/camera_close_btn_size"
+            android:layout_height="@dimen/camera_close_btn_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.raylson.jansen.inspetor.ZoomRulerView
+            android:id="@+id/zoomRuler"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:layout_marginBottom="16dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnCaptureRing"
+            android:layout_width="76dp"
+            android:layout_height="76dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="38dp"
+            app:cardElevation="0dp"
+            app:cardMaxElevation="0dp"
+            app:cardPreventCornerOverlap="false">
+
+            <FrameLayout
+                android:id="@+id/btnCaptureSpacing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF">
+
+                <View
+                    android:id="@+id/btnCaptureInner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

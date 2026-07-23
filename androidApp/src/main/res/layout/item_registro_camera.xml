@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="5dp"
+    app:cardCornerRadius="14dp"
+    app:cardBackgroundColor="#1E2330"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Linha principal: ícone + label + check -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="14dp">
+
+            <!-- Ícone câmera colorido -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardIcone"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                app:cardCornerRadius="12dp"
+                app:cardBackgroundColor="#EF4444"
+                app:cardElevation="0dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_camera_white"
+                    android:padding="11dp"
+                    android:scaleType="centerInside"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Textos -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="14dp">
+
+                <TextView
+                    android:id="@+id/tvItemLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REGISTRO DO / HM-01"
+                    android:textColor="#E8ECF4"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"/>
+
+                <TextView
+                    android:id="@+id/tvItemSub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Toque para fotografar"
+                    android:textColor="#5A6478"
+                    android:textSize="10sp"
+                    android:fontFamily="monospace"
+                    android:layout_marginTop="2dp"/>
+
+                <TextView
+                    android:id="@+id/tvStatusChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="ZERADO"
+                    android:textColor="@android:color/white"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- Indicador concluído (oculto por padrão) -->
+            <ImageView
+                android:id="@+id/imgCheck"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@android:drawable/checkbox_on_background"
+                android:tint="#22C55E"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- Preview da foto (oculto por padrão) -->
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"/>
+
+        <!-- Botão refazer (oculto por padrão) -->
+        <TextView
+            android:id="@+id/tvRefazer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="↺  Refazer foto"
+            android:textColor="#5A6478"
+            android:textSize="10sp"
+            android:fontFamily="monospace"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="8dp"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

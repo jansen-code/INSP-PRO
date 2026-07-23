@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    dialog_recorte_sc.xml
+    Tela de recorte/perspectiva do card "SC" — 100% própria do INSPETOR,
+    sem nenhuma tela ou marca do Google. Fundo branco, mesmo estilo do
+    resto do app.
+
+    Como usar:
+      - Arraste os 4 CANTOS (bolinhas marrons) pra ajustar a perspectiva
+        e "achatar" o documento.
+      - Arraste as alças BRANCAS no meio de cada lado pra cortar em linha
+        reta: puxar a de cima/baixo move as duas pontas daquela borda
+        juntas (fica sempre reto); puxar a da esquerda/direita faz o
+        mesmo na horizontal.
+      - O slider "ENDIREITAR" gira a foto pra corrigir inclinação antes
+        do corte.
+
+    IDs usados pelo DashboardActivity.kt (mostrarDialogRecorteSC):
+      cropViewSC, seekEndireitarSC, tvGrausRecorteSC,
+      btnFecharDialogRecorteSC, btnResetarRecorteSC, btnAplicarRecorteSC
+-->
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- ═══ TOP BAR ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AJUSTAR RECORTE"
+            android:textColor="#94A3B8"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.15" />
+
+        <!-- ═══ NOVO: re-executa a detecção automática de bordas em cima
+             da foto atual (útil se a detecção da hora da captura não
+             saiu boa, ou se o usuário girou/cortou antes) ═══ -->
+        <ImageView
+            android:id="@+id/btnAutoDetectarBordaSC"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_crop"
+            app:tint="#2563EB"
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Detectar borda automaticamente" />
+
+        <!-- Modo de marcação por toque: ativa a captura de 4 cantos por toques na tela -->
+        <ImageView
+            android:id="@+id/btnModoToqueSC"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_input_add"
+            app:tint="#94A3B8"
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Modo tocar para marcar" />
+
+        <ImageView
+            android:id="@+id/btnFecharDialogRecorteSC"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#94A3B8"
+            android:padding="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Cancelar" />
+    </LinearLayout>
+
+    <!-- ═══ ÁREA DE RECORTE (própria do INSPETOR — sem Google) ═══ -->
+    <com.raylson.jansen.inspetor.DocumentCropView
+        android:id="@+id/cropViewSC"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp" />
+
+    <!-- ═══ ENDIREITAR ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ENDIREITAR"
+                android:textColor="#94A3B8"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.05" />
+
+            <TextView
+                android:id="@+id/tvGrausRecorteSC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0°"
+                android:textColor="#8B5C29"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekEndireitarSC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="30"
+            android:progress="15"
+            android:progressTint="#8B5C29"
+            android:thumbTint="#8B5C29" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F1F5F9"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginBottom="14dp" />
+
+    <!-- ═══ BOTÕES ═══ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="18dp"
+        android:paddingBottom="16dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#F3ECE2"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <Button
+                android:id="@+id/btnResetarRecorteSC"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="RESETAR"
+                android:textColor="#8B5C29"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#8B5C29"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <Button
+                android:id="@+id/btnAplicarRecorteSC"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="APLICAR"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>

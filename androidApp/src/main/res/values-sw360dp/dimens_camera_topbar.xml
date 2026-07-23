@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Overrides aplicados automaticamente pelo sistema Android em telas com
+    largura menor (smallestWidth < 360dp), reduzindo levemente tamanhos e
+    espaçamentos para evitar aperto/corte da topbar em aparelhos compactos.
+    Nenhuma alteração de código é necessária: o próprio Android resolve
+    qual arquivo usar com base no tamanho da tela do dispositivo.
+-->
+<resources>
+    <dimen name="camera_topbar_height">84dp</dimen>
+    <dimen name="camera_topbar_padding_h">12dp</dimen>
+    <dimen name="camera_topbar_padding_top">20dp</dimen>
+
+    <dimen name="camera_close_btn_size">36dp</dimen>
+    <dimen name="camera_close_icon_padding">9dp</dimen>
+
+    <dimen name="camera_group_padding_h">4dp</dimen>
+    <dimen name="camera_group_padding_v">4dp</dimen>
+    <dimen name="camera_group_item_margin">2dp</dimen>
+
+    <dimen name="camera_action_btn_size">32dp</dimen>
+    <dimen name="camera_grid_icon_size">16sp</dimen>
+    <dimen name="camera_guia_icon_padding">6dp</dimen>
+
+    <dimen name="camera_ratio_chip_height">32dp</dimen>
+    <dimen name="camera_ratio_chip_width">56dp</dimen>
+    <dimen name="camera_ratio_chip_padding_h">8dp</dimen>
+    <dimen name="camera_ratio_text_size">13sp</dimen>
+</resources>

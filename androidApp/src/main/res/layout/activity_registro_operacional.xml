@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0A0C0F">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="#0D1017">
+
+        <ImageView
+            android:id="@+id/btnVoltar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@android:drawable/ic_media_previous"
+            android:tint="#5A6478"
+            android:padding="6dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="Registro Operacional"
+            android:textColor="#E8ECF4"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:fontFamily="monospace"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/bg_dot_green"
+            android:layout_marginEnd="6dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ONLINE"
+            android:textColor="#5A6478"
+            android:textSize="9sp"
+            android:fontFamily="monospace"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#2563EB"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerRegistros"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1F2937"/>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#0D1017"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                android:id="@+id/btnDet01"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="DET-01"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/btnArb05"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="ARB-05"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/btnArb06"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="ARB-06"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/btnArb07"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="ARB-07"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/btnArb08"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="ARB-08"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/btnArb09"
+                android:layout_width="85dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="4dp"
+                android:background="#1F2937"
+                android:text="ARB-09"
+                android:textColor="#E8ECF4"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

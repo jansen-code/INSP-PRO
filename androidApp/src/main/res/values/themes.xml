@@ -1,0 +1,13 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- ═══ Fonte padrão do app (Roboto Regular bundled) — serve de rede
+         de segurança pra qualquer texto que NÃO declare fontFamily
+         explicitamente. A maioria das telas já declara sans-serif-medium/
+         sans-serif-black por view (agora trocados pros arquivos bundled
+         em cada layout), então isso aqui cobre só o que sobrar. ═══ -->
+    <item name="android:fontFamily">@font/app_font_ui_regular</item>
+    <item name="fontFamily">@font/app_font_ui_regular</item>
+  </style>
+
+  <style name="AppTheme" parent="Base.AppTheme" />
+</resources>

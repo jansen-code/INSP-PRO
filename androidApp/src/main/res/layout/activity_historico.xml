@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout 
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFC">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/bg_header_retangulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:color/transparent"
+            app:cardBackgroundColor="#2563EB"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="10dp"
+            app:cardUseCompatPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--
+                RESPONSIVIDADE: removido o "android:minHeight" fixo que existia aqui.
+                Agora a altura do card é 100% definida pelo conteúdo real (wrap_content)
+                + as constraints abaixo, então ele "abraça" o conteúdo em qualquer tela,
+                sem sobra de espaço em telas grandes nem corte/overlap em telas pequenas.
+            -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="18dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="18dp"
+                android:paddingBottom="22dp">
+
+                <View
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:alpha="0.12"
+                    android:background="#FFFFFF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:alpha="0.08"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <ImageView
+                    android:id="@+id/btn_back"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_circle_back_outlined"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#FFFFFF" />
+
+                <LinearLayout
+                    android:id="@+id/btn_limpar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_btn_limpar_outlined"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="18dp"
+                    app:layout_constraintBottom_toBottomOf="@id/btn_back"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/btn_back">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.05"
+                        android:text="LIMPAR"
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!--
+                    TÍTULO: antes "tv_titulo_principal" e o subtítulo ficavam dentro de um
+                    LinearLayout que era espremido por uma "corrente" de 3 views de largura
+                    igual (linha esquerda / título / linha direita), forçando o título a
+                    caber em ~1/3 da tela e quebrar linha em aparelhos menores (Moto G30).
+
+                    Agora o título é um elemento independente (largura wrap_content) e as
+                    linhas decorativas se ajustam a ELE, e não o contrário. Com
+                    autoSizeText como rede de segurança extra, "HISTÓRICO" nunca mais
+                    quebra linha, não importa o tamanho da tela.
+                -->
+                <TextView
+                    android:id="@+id/tv_titulo_principal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:fontFamily="@font/app_font_ui_black"
+                    android:maxLines="1"
+                    android:text="HISTÓRICO"
+                    android:textColor="#FFFFFF"
+                    android:textSize="27sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="27sp"
+                    app:autoSizeMinTextSize="18sp"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btn_back"
+                    app:layout_constraintEnd_toStartOf="@id/linha_topo_direita" />
+
+                <View
+                    android:id="@+id/linha_topo_esquerda"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:alpha="0.80"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_titulo_principal"
+                    app:layout_constraintEnd_toStartOf="@id/tv_titulo_principal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_titulo_principal" />
+
+                <View
+                    android:id="@+id/linha_topo_direita"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="12dp"
+                    android:alpha="0.80"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_titulo_principal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_titulo_principal"
+                    app:layout_constraintTop_toTopOf="@id/tv_titulo_principal" />
+
+                <TextView
+                    android:id="@+id/tv_subtitulo_historico"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Escolha o local para visualizar"
+                    android:textColor="#DBEAFE"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_titulo_principal"
+                    app:layout_constraintTop_toBottomOf="@id/tv_titulo_principal" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier_header_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="tv_subtitulo_historico" />
+
+                <TextView
+                    android:id="@+id/tv_selecione"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:ellipsize="end"
+                    android:letterSpacing="0.04"
+                    android:maxLines="1"
+                    android:text="SELECIONE"
+                    android:textAllCaps="true"
+                    android:textColor="#E0E7FF"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/barrier_header_bottom" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_quadrados_opcoes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="128dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bg_header_retangulo" />
+
+        <ImageView
+            android:id="@+id/bg_footer_curvo"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:alpha="0"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@android:color/white"
+        app:contentInsetEnd="0dp"
+        app:paddingBottomSystemWindowInsets="false"
+        
+        
+        app:contentInsetStart="0dp"
+        app:elevation="12dp"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="18dp"
+        app:fabCradleVerticalOffset="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            
+            <LinearLayout
+                android:id="@+id/btnIrParaListaNA"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless">
+                <ImageView 
+                    android:layout_width="22dp" 
+                    android:layout_height="22dp" 
+                    android:src="@drawable/ic_registro_pen" 
+                    app:tint="#94A3B8"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:focusable="false" />
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <View
+        android:id="@+id/frame_relogio_box"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:alpha="0"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_relogio_estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Alternar modo do histórico"
+        app:layout_anchor="@id/bottomAppBar"
+        app:srcCompat="@android:drawable/ic_menu_recent_history"
+        app:tint="@android:color/white"
+        app:backgroundTint="#2563EB"
+        app:elevation="6dp"
+        app:maxImageSize="24dp"
+        app:fabCustomSize="56dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

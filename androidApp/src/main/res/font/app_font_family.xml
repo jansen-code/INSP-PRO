@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ═══ FONTE FIXA DO APP: ROBOTO MONO ═══
+  Isso aqui é o que garante que a fonte do INSPETOR seja SEMPRE a mesma,
+  não importa o celular ou o que o usuário mudou nas configurações de
+  fonte do sistema (Samsung, Xiaomi etc. deixam trocar a fonte do
+  aparelho inteiro — sem isso aqui, o app "seguiria" essa escolha).
+
+  Recomendação: ROBOTO MONO — é literalmente a fonte que já aparece hoje
+  na tarja gravada nas fotos (o app usava o "apelido" genérico
+  Typeface.MONOSPACE do Android, que na prática cai em Roboto Mono na
+  maioria dos aparelhos). Usando ela aqui, o visual técnico/engenharia
+  que você já tem e gosta não muda NADA — só fica garantido, travado,
+  em qualquer celular, sem depender de "apelido" nenhum do sistema.
+
+  Pra funcionar, precisa de 2 arquivos de fonte (.ttf) dentro da pasta
+  res/font/ do projeto, com EXATAMENTE esses nomes:
+    - res/font/app_font_regular.ttf   (Roboto Mono Regular)
+    - res/font/app_font_bold.ttf      (Roboto Mono Bold)
+
+  Onde conseguir: https://fonts.google.com/specimen/Roboto+Mono — baixe
+  o .zip, pegue "RobotoMono-Regular.ttf" e "RobotoMono-Bold.ttf" (ficam
+  dentro de uma subpasta "static"), renomeia pros 2 nomes acima e coloca
+  dentro de app/src/main/res/font/ (crie a pasta "font" se não existir).
+
+  Se preferir uma mono ainda mais "de engenharia"/técnica, alternativas
+  também gratuitas no mesmo site: "JetBrains Mono" ou "IBM Plex Mono" —
+  é só baixar ela no lugar da Roboto Mono e renomear do mesmo jeito.
+-->
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        app:font="@font/app_font_regular"
+        app:fontStyle="normal"
+        app:fontWeight="400" />
+    <font
+        app:font="@font/app_font_bold"
+        app:fontStyle="normal"
+        app:fontWeight="700" />
+</font-family>

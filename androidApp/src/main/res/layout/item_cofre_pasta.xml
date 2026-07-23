@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Card de pasta do Cofre — layout PENSADO para grade (GridLayoutManager, 3
+    colunas), ao contrário da versão antiga (linha horizontal larga, pensada
+    para lista vertical). Tamanho do card é FIXO (altura 128dp + largura
+    igual à da coluna do grid) independente do texto, então "5 fotos" e
+    "100 fotos" ocupam exatamente o mesmo espaço — só o texto interno
+    muda, nunca o card.
+-->
+<androidx.cardview.widget.CardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardPastaCofre"
+    android:layout_width="match_parent"
+    android:layout_height="128dp"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="#EFF6FF"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#DBEAFE"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingHorizontal="6dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/imgIconePasta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/ic_pasta_cofre"
+                android:contentDescription="Pasta" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvNomePasta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="DET-01"
+            android:textColor="#0F172A"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <!-- Largura mínima garante que o texto "1 foto" e "100 fotos"
+             ocupem a mesma faixa central, sem empurrar nada ao redor —
+             mas quem trava o tamanho do CARD é a altura fixa acima. -->
+        <TextView
+            android:id="@+id/tvQtdFotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:minWidth="56dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="0 fotos"
+            android:textColor="#94A3B8"
+            android:textSize="11sp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores base -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="bg_light">#F0F4F8</color>
+    <color name="text_dark">#1A1A2E</color>
+    <color name="text_muted">#9AA0B0</color>
+    <color name="card_border">#E5E7EB</color>
+    <color name="card_inactive">#F0F2F5</color>
+
+    <!-- Cor principal do app -->
+    <color name="primary_blue">#3461FF</color>
+    <color name="primary_blue_light">#1A3461FF</color>
+
+    <!-- Status -->
+    <color name="status_green">#2DC653</color>
+    <color name="status_green_bg">#E6F9ED</color>
+    <color name="status_red">#F45B26</color>
+    <color name="status_red_bg">#FEF0EB</color>
+
+    <!-- Estações -->
+    <color name="det01">#3461FF</color>
+    <color name="arb06">#2DC653</color>
+    <color name="arb07">#F4A726</color>
+    <color name="arb08">#F45B26</color>
+    <color name="arb91">#26C4F4</color>
+    <color name="arb92">#8E8E93</color>
+
+    <!-- Extras -->
+    <color name="dot_yellow">#F4A726</color>
+    <color name="step_line">#E5E7EB</color>
+    <color name="bomba_bg">#EEF2FF</color>
+    <color name="bolt_box_bg">#D4D9E3</color>
+</resources>
