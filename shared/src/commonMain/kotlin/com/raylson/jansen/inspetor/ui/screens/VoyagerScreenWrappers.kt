@@ -28,3 +28,10 @@ object ControleNARoute : Screen {
         ControleNAScreen() // função original de MainScreens.kt, sem alteração
     }
 }
+
+object CofreRoute : Screen {
+    @Composable
+    override fun Content() {
+        CofreScreen() // stub em CofreScreens.kt, sem alteração
+    }
+}

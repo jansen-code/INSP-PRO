@@ -285,4 +285,21 @@ object CofreManager {
         try { File(item.arquivo.parentFile?.parentFile, "$PASTA_THUMBS/${item.arquivo.name}.thumb.jpg").delete() } catch (_: Exception) {}
         return try { item.arquivo.delete() } catch (e: Exception) { false }
     }
+
+    fun garantirPastaCofre(context: Context): File {
+        val dir = pastaCofre(context)
+        if (!dir.exists()) dir.mkdirs()
+        return dir
+    }
+
+    fun excluirGrupo(context: Context, grupo: Grupo) {
+        val dir = pastaCofre(context)
+        val arquivos = dir.listFiles { f ->
+            f.isFile && f.name.startsWith("${grupo.slug}__") && f.name.endsWith(EXTENSAO)
+        } ?: return
+        for (arquivo in arquivos) {
+            try { File(arquivo.parentFile?.parentFile, "$PASTA_THUMBS/${arquivo.name}.thumb.jpg").delete() } catch (_: Exception) {}
+            arquivo.delete()
+        }
+    }
 }

@@ -50,7 +50,7 @@ object DashboardScreen : Screen {
                 DashboardBottomBar(
                     onHistorico = { navigator.push(HistoricoRoute) },
                     onListaNA = { navigator.push(ControleNARoute) },
-                    onCofre = { /* navigator.push(CofreRoute) */ },
+                    onCofre = { navigator.push(CofreRoute) },
                     onGerar = { screenModel.gerarRegistro() }
                 )
             }
