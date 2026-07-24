@@ -25,6 +25,7 @@ jobs:
           XCODE_PATH=$(ls -d /Applications/Xcode_*.app 2>/dev/null | sort -V | tail -1)
           echo "Usando: $XCODE_PATH"
           sudo xcode-select -s "$XCODE_PATH/Contents/Developer"
+          xcodebuild -version
 
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -32,8 +33,40 @@ jobs:
       - name: Dar permissao ao Gradle
         run: chmod +x gradlew
 
-      - name: Compilar framework iOS (Simulator Arm64)
-        run: ./gradlew :shared:compileKotlinIosSimulatorArm64 --no-daemon
-
-      - name: Linkar framework iOS debug
+      - name: Compilar e linkar framework iOS (Simulator Arm64)
         run: ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64 --no-daemon
+
+      - name: Compilar app iOS via Xcode (Simulator)
+        run: |
+          xcodebuild \
+            -project iosApp/iosApp.xcodeproj \
+            -scheme iosApp \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            -derivedDataPath build/xcode-derived \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_ENTITLEMENTS="" \
+            ENABLE_BITCODE=NO
+
+      - name: Localizar .app gerada
+        id: find-app
+        run: |
+          APP_PATH=$(find build/xcode-derived -name "INSPETOR.app" -type d | head -1)
+          echo "app_path=$APP_PATH" >> "$GITHUB_OUTPUT"
+          echo "App encontrada em: $APP_PATH"
+          ls -la "$APP_PATH"
+
+      - name: Empacotar .app em .zip
+        run: |
+          cd "$(dirname "${{ steps.find-app.outputs.app_path }}")"
+          zip -r -y INSPETOR-ios-simulator.zip "$(basename "${{ steps.find-app.outputs.app_path }}")"
+
+      - name: Upload artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: INSPETOR-ios-simulator
+          path: build/xcode-derived/**/INSPETOR-ios-simulator.zip
+          if-no-files-found: error
+          retention-days: 14
