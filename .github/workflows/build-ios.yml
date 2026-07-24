@@ -33,15 +33,15 @@ jobs:
       - name: Dar permissao ao Gradle
         run: chmod +x gradlew
 
-      - name: Compilar e linkar framework iOS (Simulator Arm64)
-        run: ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64 --no-daemon
+      - name: Compilar e linkar framework iOS (Device Arm64)
+        run: ./gradlew :shared:linkDebugFrameworkIosArm64 --no-daemon
 
-      - name: Compilar app iOS via Xcode (Simulator)
+      - name: Compilar app iOS via Xcode (Device)
         run: |
           xcodebuild \
             -project iosApp/iosApp.xcodeproj \
             -scheme iosApp \
-            -destination 'generic/platform=iOS Simulator' \
+            -destination 'generic/platform=iOS' \
             -configuration Debug \
             -derivedDataPath build/xcode-derived \
             CODE_SIGNING_ALLOWED=NO \
@@ -50,23 +50,29 @@ jobs:
             CODE_SIGN_ENTITLEMENTS="" \
             ENABLE_BITCODE=NO
 
-      - name: Localizar .app gerada
-        id: find-app
+      - name: Localizar .app, criar Payload e gerar .ipa
         run: |
+          # 1. Localiza a pasta INSPETOR.app
           APP_PATH=$(find build/xcode-derived -name "INSPETOR.app" -type d | head -1)
-          echo "app_path=$APP_PATH" >> "$GITHUB_OUTPUT"
           echo "App encontrada em: $APP_PATH"
-          ls -la "$APP_PATH"
+          
+          # 2. Entra na pasta onde ela esta
+          cd "$(dirname "$APP_PATH")"
+          
+          # 3. Cria a estrutura Payload e move o app
+          mkdir -p Payload
+          mv INSPETOR.app Payload/
+          
+          # 4. Compacta no formato correto .ipa
+          zip -qr INSPETOR.ipa Payload
+          
+          # 5. Move o .ipa pronto para a raiz do projeto
+          mv INSPETOR.ipa $GITHUB_WORKSPACE/
 
-      - name: Empacotar .app em .zip
-        run: |
-          cd "$(dirname "${{ steps.find-app.outputs.app_path }}")"
-          zip -r -y INSPETOR-ios-simulator.zip "$(basename "${{ steps.find-app.outputs.app_path }}")"
-
-      - name: Upload artefato
+      - name: Upload artefato IPA
         uses: actions/upload-artifact@v4
         with:
-          name: INSPETOR-ios-simulator
-          path: build/xcode-derived/**/INSPETOR-ios-simulator.zip
+          name: INSPETOR-ios-device
+          path: INSPETOR.ipa
           if-no-files-found: error
           retention-days: 14
