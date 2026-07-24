@@ -21,7 +21,10 @@ jobs:
           java-version: '17'
 
       - name: Selecionar Xcode
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+        run: |
+          XCODE_PATH=$(ls -d /Applications/Xcode_*.app 2>/dev/null | sort -V | tail -1)
+          echo "Usando: $XCODE_PATH"
+          sudo xcode-select -s "$XCODE_PATH/Contents/Developer"
 
       - name: Configurar Gradle
         uses: gradle/actions/setup-gradle@v4
