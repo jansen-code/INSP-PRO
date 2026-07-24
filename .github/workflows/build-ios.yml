@@ -1,0 +1,36 @@
+name: Compilar iOS
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Baixar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17 (Eclipse Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Selecionar Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Dar permissao ao Gradle
+        run: chmod +x gradlew
+
+      - name: Compilar framework iOS (Simulator Arm64)
+        run: ./gradlew :shared:compileKotlinIosSimulatorArm64 --no-daemon
+
+      - name: Linkar framework iOS debug
+        run: ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64 --no-daemon
