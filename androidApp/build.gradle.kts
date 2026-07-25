@@ -14,6 +14,8 @@ kotlin {
 dependencies {
     implementation(project(":shared"))
 
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.screenmodel)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
     implementation(libs.compose.material3)
