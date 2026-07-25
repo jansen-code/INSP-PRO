@@ -52,6 +52,8 @@
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" 
             android:screenOrientation="portrait" />
             
+        <activity android:name=".InspMapActivity" android:exported="false" />
+
         <activity android:name=".OnboardingActivity" />    
 
         <activity

@@ -657,7 +657,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setupBotaoConfiguracoes() {
         btnConfiguracoes.setOnClickListener {
-            abrirCameraComCameraX("hidro")
+            startActivity(Intent(this, InspMapActivity::class.java))
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         }
     }
