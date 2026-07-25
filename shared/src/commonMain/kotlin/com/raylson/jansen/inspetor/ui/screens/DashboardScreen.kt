@@ -1,6 +1,7 @@
 package com.raylson.jansen.inspetor.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -75,10 +77,17 @@ object DashboardScreen : Screen {
                         shape = RoundedCornerShape(14.dp),
                         colors = CardDefaults.cardColors(containerColor = Color.White),
                         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-                        modifier = Modifier.size(44.dp)
+                        modifier = Modifier
+                            .size(44.dp)
+                            .clickable { navigator.push(ConfiguracoesRoute) }
                     ) {
                         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                            // Ícone configurações — navigator.push(ConfiguracoesScreen)
+                            Icon(
+                                Icons.Filled.Settings,
+                                contentDescription = "Configurações",
+                                tint = Color(0xFF64748B),
+                                modifier = Modifier.size(22.dp)
+                            )
                         }
                     }
                 }

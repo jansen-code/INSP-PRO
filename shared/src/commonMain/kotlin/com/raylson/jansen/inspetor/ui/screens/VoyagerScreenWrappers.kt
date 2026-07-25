@@ -35,3 +35,10 @@ object CofreRoute : Screen {
         CofreScreen() // stub em CofreScreens.kt, sem alteração
     }
 }
+
+object ConfiguracoesRoute : Screen {
+    @Composable
+    override fun Content() {
+        ConfiguracoesScreen()
+    }
+}
