@@ -101,7 +101,7 @@ class InspMapScreenModel : ScreenModel {
                 _state.update {
                     it.copy(
                         precisaoMetros = precisao,
-                        LatitudeAtual = lat,
+                        latitudeAtual = lat,
                         longitudeAtual = lon
                     )
                 }
