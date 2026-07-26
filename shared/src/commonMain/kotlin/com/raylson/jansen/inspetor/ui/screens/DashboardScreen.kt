@@ -11,7 +11,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -79,15 +78,13 @@ object DashboardScreen : Screen {
                         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                         modifier = Modifier
                             .size(44.dp)
-                            .clickable { navigator.push(ConfiguracoesRoute) }
+                            .clickable {
+                                // NOVO COMPORTAMENTO: Abre o módulo InspMap em vez de Configurações
+                                navigator.push(InspMapScreen)
+                            }
                     ) {
                         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                            Icon(
-                                Icons.Filled.Settings,
-                                contentDescription = "Configurações",
-                                tint = Color(0xFF64748B),
-                                modifier = Modifier.size(22.dp)
-                            )
+                            // Ícone visual (Ex: um ícone de mapa ou configuração que já estava lá)
                         }
                     }
                 }
@@ -263,3 +260,4 @@ private fun LagoNACarousel(
         }
     }
 }
+```
