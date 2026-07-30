@@ -27,8 +27,8 @@ dependencies {
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
 
-    // OSMDroid para mapas offline
-    implementation("org.osmdroid:android:6.1.20")
+    // OSMDroid para mapas offline - Versão mais recente com metadados completos
+    implementation("org.osmdroid:android:6.1.22")
 
     // CameraX (CameraCaptureActivity)
     implementation("androidx.camera:camera-core:1.3.1")
