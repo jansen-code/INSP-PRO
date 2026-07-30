@@ -19,7 +19,8 @@ data class InspMapUiState(
     val btConectado: Boolean = false,
     val precisaoMetros: Double = 0.0,
     val latitudeAtual: Double = 0.0,
-    val longitudeAtual: Double = 0.0
+    val longitudeAtual: Double = 0.0,
+    val fotosTemporarias: List<String> = emptyList()
 )
 
 class InspMapScreenModel : ScreenModel {
@@ -55,6 +56,10 @@ class InspMapScreenModel : ScreenModel {
         _state.update { it.copy(zonaUtmSelecionada = zona) }
     }
 
+    fun adicionarFotoAoProjeto(caminho: String) {
+        _state.update { it.copy(fotosTemporarias = it.fotosTemporarias + caminho) }
+    }
+
     fun salvarProjeto() {
         val atual = _state.value
         if (atual.nomeProjetoTemp.isBlank()) return
@@ -67,14 +72,16 @@ class InspMapScreenModel : ScreenModel {
                 dataHora = agora,
                 latitude = atual.latitudeAtual,
                 longitude = atual.longitudeAtual,
-                zonaUtm = atual.zonaUtmSelecionada
+                zonaUtm = atual.zonaUtmSelecionada,
+                caminhosFotos = atual.fotosTemporarias
             )
 
             _state.update { estado ->
                 estado.copy(
                     projetos = estado.projetos + novoPonto,
                     dialogNovoProjetoAberto = false,
-                    nomeProjetoTemp = ""
+                    nomeProjetoTemp = "",
+                    fotosTemporarias = emptyList()
                 )
             }
         }
