@@ -5,6 +5,11 @@ plugins {
     alias(libs.plugins.composeCompiler)
 }
 
+repositories {
+    mavenCentral()
+    google()
+}
+
 kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_11
@@ -27,8 +32,8 @@ dependencies {
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
 
-    // OSMDroid para mapas offline - Versão mais recente com metadados completos
-    implementation("org.osmdroid:android:6.1.22")
+    // OSMDroid para mapas offline - Versão 6.1.20 (stable)
+    implementation("org.osmdroid:android:6.1.20")
 
     // CameraX (CameraCaptureActivity)
     implementation("androidx.camera:camera-core:1.3.1")
