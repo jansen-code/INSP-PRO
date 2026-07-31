@@ -657,7 +657,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setupBotaoConfiguracoes() {
         btnConfiguracoes.setOnClickListener {
-            startActivity(Intent(this, InspMapActivity::class.java))
+            startActivity(Intent(this, ConfiguracoesActivity::class.java))
             it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
         }
     }

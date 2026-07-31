@@ -79,8 +79,7 @@ object DashboardScreen : Screen {
                         modifier = Modifier
                             .size(44.dp)
                             .clickable {
-                                // NOVO COMPORTAMENTO: Abre o módulo InspMap em vez de Configurações
-                                navigator.push(InspMapScreen)
+                                navigator.push(ConfiguracoesRoute)
                             }
                     ) {
                         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
